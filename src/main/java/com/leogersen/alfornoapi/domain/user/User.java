@@ -46,7 +46,7 @@ public class User implements Serializable {
     @NotEmpty(message = "O nome do bairro não pode estar vazio")
     private String district;
 
-    @NotEmpty(message = "O número é obrigatório")
+    @NotNull(message = "O número é obrigatório")
     private Integer number;
 
     private String complement;

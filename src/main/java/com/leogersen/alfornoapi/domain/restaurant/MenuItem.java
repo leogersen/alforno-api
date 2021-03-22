@@ -43,7 +43,7 @@ public class MenuItem implements Serializable {
     //@UploadConstraint(acceptedTypes = FileType.PNG, message = "O arquivo é inválido")
     private transient MultipartFile imageFile;
 
-    @NotEmpty(message = "O campo descrição não pode estar vazio")
+    @NotNull(message = "O campo descrição não pode estar vazio")
     @Min(0)
     private BigDecimal price;
 
