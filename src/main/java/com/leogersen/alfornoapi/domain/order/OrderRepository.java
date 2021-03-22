@@ -11,7 +11,7 @@ import java.util.List;
 public interface OrderRepository extends JpaRepository<Order, Integer> {
 
     /*
-    @Query("SELECT o FROM Order o WHERE o.client.id =?1 ORDER BY o.data DESC")
+    @Query("SELECT o FROM Order o WHERE o.client.id =?1 ORDER BY o.date DESC")
     public List<Order> listOfOrders(Integer clientId);
 
     public List<Order> findByRestaurant_IdOrderByDateDesc(Integer restaurantId);
