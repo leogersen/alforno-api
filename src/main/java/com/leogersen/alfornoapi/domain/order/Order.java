@@ -18,7 +18,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Table(name = "orders")
-@EntityListeners(OrderLitener.class)
+@EntityListeners(OrderListener.class)
 public class Order implements Serializable {
 
     public enum Status {

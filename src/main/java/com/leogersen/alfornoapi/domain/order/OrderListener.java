@@ -10,7 +10,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.PrePersist;
 
 @Component
-public class OrderLitener {
+public class OrderListener {
 
     private static ClientRepository clientRepository;
 
@@ -30,7 +30,7 @@ public class OrderLitener {
 
     @Autowired
     public void init(ClientRepository clientRepository){
-        OrderLitener.clientRepository = clientRepository;
+        OrderListener.clientRepository = clientRepository;
     }
 
 }
