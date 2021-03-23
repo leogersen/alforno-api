@@ -18,6 +18,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Table(name = "orders")
+@EntityListeners(OrderLitener.class)
 public class Order implements Serializable {
 
     public enum Status {
@@ -60,8 +61,6 @@ public class Order implements Serializable {
         }
 
     }
-
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

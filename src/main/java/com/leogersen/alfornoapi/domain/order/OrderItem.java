@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -25,15 +26,16 @@ public class OrderItem implements Serializable {
     private OrderItemPK id;
 
     @NotNull
+    @ManyToOne
     private MenuItem menuItem;
 
-    @NotEmpty
+    @NotNull
     private Integer quantity;
 
     @NotEmpty
     private String obs;
 
-    @NotEmpty
+    @NotNull
     private BigDecimal price;
 
 

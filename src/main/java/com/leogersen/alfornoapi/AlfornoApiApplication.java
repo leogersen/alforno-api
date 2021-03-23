@@ -1,5 +1,6 @@
 package com.leogersen.alfornoapi;
 
+import com.leogersen.alfornoapi.domain.client.Client;
 import com.leogersen.alfornoapi.domain.order.Order;
 import com.leogersen.alfornoapi.domain.restaurant.MenuItem;
 import com.leogersen.alfornoapi.domain.restaurant.Restaurant;
@@ -8,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.core.event.ValidatingRepositoryEventListener;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
@@ -27,7 +29,7 @@ public class AlfornoApiApplication implements RepositoryRestConfigurer {
 
 	@Override
 	public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config, CorsRegistry cors) {
-		config.exposeIdsFor(MenuItem.class, Restaurant.class, Order.class);
+		config.exposeIdsFor(MenuItem.class, Restaurant.class, Order.class, Client.class);
 		cors.addMapping("/**")
 			.allowedOrigins("*")
 			.allowedMethods("GET", "POST", "PUT", "DELETE");

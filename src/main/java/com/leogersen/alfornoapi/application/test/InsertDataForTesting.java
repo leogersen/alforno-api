@@ -3,8 +3,7 @@ package com.leogersen.alfornoapi.application.test;
 
 import com.leogersen.alfornoapi.domain.client.Client;
 import com.leogersen.alfornoapi.domain.client.ClientRepository;
-import com.leogersen.alfornoapi.domain.order.Order;
-import com.leogersen.alfornoapi.domain.order.OrderRepository;
+import com.leogersen.alfornoapi.domain.order.*;
 import com.leogersen.alfornoapi.domain.restaurant.*;
 import com.leogersen.alfornoapi.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +16,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Component
 public class InsertDataForTesting {
@@ -30,12 +30,14 @@ public class InsertDataForTesting {
     @Autowired
     private RestaurantCategoryRepository restaurantCategoryRepository;
 
-
     @Autowired
     private MenuItemRepository menuItemRepository;
 
     @Autowired
     private OrderRepository orderRepository;
+
+    @Autowired
+    private OrderItemRepository orderItemRepository;
 
 
     @EventListener
@@ -54,6 +56,18 @@ public class InsertDataForTesting {
         o.setDeliveryTax(BigDecimal.valueOf(5));
         o.setTotal(BigDecimal.valueOf(20));
         orderRepository.save(o);
+
+        o = new Order();
+        o.setDate(LocalDateTime.now());
+        o.setClient(clients[1]);
+        o.setRestaurant(restaurants[0]);
+        o.setStatus(Order.Status.Production);
+        o.setSubTotal(BigDecimal.valueOf(15));
+        o.setDeliveryTax(BigDecimal.valueOf(5));
+        o.setTotal(BigDecimal.valueOf(20));
+        orderRepository.save(o);
+
+
     }
 
     private Restaurant[] restaurants() {
@@ -190,6 +204,7 @@ public class InsertDataForTesting {
     }
 
     private void menuItems(Restaurant[] restaurants) {
+
         MenuItem im = new MenuItem();
         im.setCategory("Lanches");
         im.setDescription("Delicioso sanduíche de frango com legumes.");
