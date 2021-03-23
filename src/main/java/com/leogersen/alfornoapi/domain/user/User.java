@@ -1,5 +1,6 @@
 package com.leogersen.alfornoapi.domain.user;
 
+import com.leogersen.alfornoapi.util.StringUtils;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -59,7 +60,7 @@ public class User implements Serializable {
 
 
     public void encryptPassword() {
-        // TODO: Encrypt Password
+        this.password = StringUtils.encrypt(this.password);
     }
 
 }
