@@ -16,6 +16,7 @@ public class OrderListener {
 
     @PrePersist
     public void onPrePersistHandler(Order order) {
+
         if (order.getClient() == null){
             String username = SecurityContextHolder.getContext().getAuthentication().getName();
             Client client = clientRepository.findByName(username);

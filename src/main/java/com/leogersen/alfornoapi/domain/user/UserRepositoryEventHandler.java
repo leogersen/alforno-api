@@ -5,6 +5,10 @@ import com.leogersen.alfornoapi.domain.client.Client;
 import com.leogersen.alfornoapi.domain.client.ClientRepository;
 import com.leogersen.alfornoapi.domain.restaurant.Restaurant;
 import com.leogersen.alfornoapi.domain.restaurant.RestaurantRepository;
+import com.leogersen.alfornoapi.infrastructure.web.security.WebSecurityConfig;
+import com.leogersen.alfornoapi.util.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.rest.core.annotation.HandleBeforeCreate;
 import org.springframework.data.rest.core.annotation.HandleBeforeSave;
 import org.springframework.data.rest.core.annotation.RepositoryEventHandler;
@@ -14,7 +18,7 @@ import org.springframework.stereotype.Component;
 @RepositoryEventHandler
 public class UserRepositoryEventHandler {
 
-
+    private static Logger logger = LoggerFactory.getLogger(UserRepositoryEventHandler.class);
     private RestaurantRepository restaurantRepository;
     private ClientRepository clientRepository;
 
@@ -26,6 +30,10 @@ public class UserRepositoryEventHandler {
     @HandleBeforeSave
     @HandleBeforeCreate
     public void handleClient(Client client) throws DuplicatedUserException {
+
+        logger.info(client.getPassword());
+        client.setPassword(StringUtils.encrypt(client.getPassword()));
+
         Client clientDB = clientRepository.findByEmail(client.getEmail());
         boolean duplicated = false;
 
