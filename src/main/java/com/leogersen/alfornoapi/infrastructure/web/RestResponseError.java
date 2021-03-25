@@ -19,7 +19,7 @@ public class RestResponseError {
         StringBuilder sb = new StringBuilder();
 
         for(ObjectError error : errors.getAllErrors()) {
-            sb.append(error.getDefaultMessage()).append(". ");
+            sb.append(error.getDefaultMessage()).append(".\n");
 
         }
 

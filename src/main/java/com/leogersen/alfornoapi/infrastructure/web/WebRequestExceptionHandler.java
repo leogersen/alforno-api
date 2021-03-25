@@ -23,4 +23,5 @@ public class WebRequestExceptionHandler {
         return RestResponseError.fromMessage(e.getMessage());
 
     }
+
 }

@@ -31,7 +31,6 @@ public class UserRepositoryEventHandler {
     @HandleBeforeCreate
     public void handleClient(Client client) throws DuplicatedUserException {
 
-        logger.info(client.getPassword());
         client.setPassword(StringUtils.encrypt(client.getPassword()));
 
         Client clientDB = clientRepository.findByEmail(client.getEmail());

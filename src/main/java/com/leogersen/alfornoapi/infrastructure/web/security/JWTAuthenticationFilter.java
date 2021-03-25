@@ -32,7 +32,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         try {
-            logger.info("chegou!");
+            logger.info("Trying to Login");
             ObjectMapper mapper = new ObjectMapper();
             User user = mapper.readValue(request.getInputStream(), Client.class);
             UsernamePasswordAuthenticationToken upat = new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword());
@@ -55,7 +55,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                       .signWith(SignatureAlgorithm.HS512,SecurityConstants.SECRET_KEY)
                       .compact();
         response.addHeader(SecurityConstants.AUTHORIZATION_HEADER, SecurityConstants.TOKEN_PREFIX + jwtToken);
-        logger.info(jwtToken);
+        logger.info("Login... Authorized");
 
     }
 }
