@@ -14,7 +14,7 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = true)
 @Table(name = "restaurant_category")
 public class RestaurantCategory implements Serializable {
 
@@ -31,5 +31,5 @@ public class RestaurantCategory implements Serializable {
     private String image;
 
     @ManyToMany(mappedBy = "categories")
-    private Set<Restaurant> restaurants = new HashSet<>();
+    private Set<Restaurant> restaurants = new HashSet<>(0);
 }

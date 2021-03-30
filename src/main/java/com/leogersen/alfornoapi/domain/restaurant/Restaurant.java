@@ -43,14 +43,12 @@ public class Restaurant extends User {
     @Min(0)
     @Max(120)
     private Integer deliveryTime;
-
+    
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "restaurant_has_category",
             joinColumns = @JoinColumn(name = "restaurant_id"),
-            inverseJoinColumns = @JoinColumn(name = "restaurant_category_id")
-    )
-
+            inverseJoinColumns = @JoinColumn(name = "restaurant_category_id"))
     @ToString.Exclude
     private Set<RestaurantCategory> categories = new HashSet<>(0);
 
@@ -72,15 +70,13 @@ public class Restaurant extends User {
 
     */
 
-    public String getCategoriesAsText() {
-        Set<String> strings = new LinkedHashSet<>();
+     public Set<RestaurantCategory> getCategoriesAsObject() {
+        return categories;
 
-        for(RestaurantCategory category : categories) {
-            strings.add(category.getName());
-        }
+    } 
 
-        return StringUtils.concatenate(strings);
-
+    public Set<MenuItem> getMenuItemsAsObject() {
+        return menuItems;
     }
 
     public void deliveryTimeCalculator(String cep) {

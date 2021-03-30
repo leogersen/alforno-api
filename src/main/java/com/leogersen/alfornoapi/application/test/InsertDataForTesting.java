@@ -57,7 +57,7 @@ public class InsertDataForTesting {
         o.setTotal(BigDecimal.valueOf(20));
         orderRepository.save(o);
 
-        o = new Order();
+        o = new Order();        
         o.setDate(LocalDateTime.now());
         o.setClient(clients[1]);
         o.setRestaurant(restaurants[0]);
@@ -103,6 +103,7 @@ public class InsertDataForTesting {
         r.setDeliveryTax(BigDecimal.valueOf(1.5));
         r.setPhone("31988733238");
         r.getCategories().add(lanchesCategory);
+        r.getCategories().add(pizzaCategory);
         r.setLogo("0002.restaurant.png");
         r.setDeliveryTime(20);
         r.setCep("31980540");
