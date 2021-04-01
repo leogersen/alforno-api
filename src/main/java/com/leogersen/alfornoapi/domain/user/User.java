@@ -3,6 +3,8 @@ package com.leogersen.alfornoapi.domain.user;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.leogersen.alfornoapi.util.StringUtils;
+
+import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -30,7 +32,7 @@ public class User implements Serializable {
     @Size(max = 80, message = "O e-mail é muito grande")
     private String email;
 
-    @JsonIgnore
+    
     @NotEmpty(message = "A senha é obrigatória")
     @Size(max = 80, message = "A senha é muito grande")
     private String password;

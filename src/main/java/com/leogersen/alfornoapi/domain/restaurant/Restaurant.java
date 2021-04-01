@@ -40,7 +40,7 @@ public class Restaurant extends User {
     @Max(120)
     private BigDecimal deliveryTax;
 
-    private BigDecimal rating = BigDecimal.valueOf(5);
+    private BigDecimal rating = BigDecimal.valueOf(5.0);
 
     @NotNull(message = "O campo tempo de entrega não pode estar vazio")
     @Min(0)
@@ -54,7 +54,7 @@ public class Restaurant extends User {
             inverseJoinColumns = @JoinColumn(name = "restaurant_category_id"))
     @ToString.Exclude
     private Set<RestaurantCategory> categories = new HashSet<>(0);
-
+    
     @OneToMany(mappedBy = "restaurant")
     private Set<MenuItem> menuItems = new HashSet<>(0);
 
@@ -79,10 +79,13 @@ public class Restaurant extends User {
        for(RestaurantCategory category : categories){
             categoriesId.add(category.getId());
         };
-
         return categoriesId;
 
     } 
+
+        public Set<MenuItem> getMenuItemsAsObject() {
+        return menuItems;
+        }
 
 
     public void deliveryTimeCalculator(String cep) {

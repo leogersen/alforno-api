@@ -85,13 +85,14 @@ public class InsertDataForTesting {
         r.setPhone("31988733237");
         r.getCategories().add(lanchesCategory);
         r.getCategories().add(pizzaCategory);
-        r.setLogo("0001.restaurant.png");
+        r.setLogo("0002.restaurant.png");
         r.setDeliveryTime(10);
         r.setCep("31980540");
         r.setStreet("Rua Afonso Pena");
         r.setDistrict("Centro");
         r.setNumber(15);
         r.setComplement("");
+        r.setRating(BigDecimal.valueOf(4.2));
         restaurantRepository.save(r);
         restaurants.add(r);
 
@@ -223,7 +224,17 @@ public class InsertDataForTesting {
         im.setName("Super Burger");
         im.setPrice(BigDecimal.valueOf(17.8));
         im.setRestaurant(restaurants[0]);
-        im.setHighlight(false);
+        im.setHighlight(true);
+        im.setImage("0002-food.png");
+        menuItemRepository.save(im);
+
+        im = new MenuItem();
+        im.setCategory("Pizzas");
+        im.setDescription("Delicioso sanduíche de frango com legumes.");
+        im.setName("Super Burger");
+        im.setPrice(BigDecimal.valueOf(17.8));
+        im.setRestaurant(restaurants[1]);
+        im.setHighlight(true);
         im.setImage("0002-food.png");
         menuItemRepository.save(im);
 

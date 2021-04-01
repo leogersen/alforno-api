@@ -55,6 +55,10 @@ public class MenuItem implements Serializable {
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
+    public Integer getRestaurantId() {
+        return restaurant.getId();
+    }
+
     /* public void setImageFileName() {
         if (getId() == null) {
             throw new IllegalStateException("O objeto precisa primeiro ser criado");
