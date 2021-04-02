@@ -180,6 +180,7 @@ public class InsertDataForTesting {
         c.setDistrict("Centro");
         c.setNumber(15);
         c.setComplement("");
+        c.setFavorites(1, 2, 3);
         clientRepository.save(c);
         clients.add(c);
 
@@ -195,6 +196,7 @@ public class InsertDataForTesting {
         c.setDistrict("Centro");
         c.setNumber(15);
         c.setComplement("");
+        c.setFavorites(1, 3);
         clientRepository.save(c);
         clients.add(c);
 

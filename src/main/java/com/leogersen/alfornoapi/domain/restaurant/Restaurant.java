@@ -82,8 +82,7 @@ public class Restaurant extends User {
         return categoriesId;
 
     } 
-
-        public Set<MenuItem> getMenuItemsAsObject() {
+    public Set<MenuItem> getMenuItemsAsObject() {
         return menuItems;
         }
 

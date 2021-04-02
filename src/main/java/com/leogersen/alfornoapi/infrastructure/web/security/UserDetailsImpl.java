@@ -13,6 +13,7 @@ public class UserDetailsImpl implements UserDetails {
     private String email;
     private String name;
     private String password;
+    private int id;
 
 
 
@@ -20,6 +21,7 @@ public class UserDetailsImpl implements UserDetails {
         this.email = user.getEmail();
         this.name = user.getName();
         this.password= user.getPassword();
+        this.id = user.getId();
 
     }
     public UserDetailsImpl(Restaurant user) {
@@ -36,6 +38,10 @@ public class UserDetailsImpl implements UserDetails {
 
     public String getName() {
         return name;
+    }
+
+    public int getId() {
+        return id;
     }
 
     @Override
