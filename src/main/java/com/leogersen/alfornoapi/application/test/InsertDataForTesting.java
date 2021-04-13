@@ -14,9 +14,11 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.Set;
 
 @Component
 public class InsertDataForTesting {
@@ -44,20 +46,17 @@ public class InsertDataForTesting {
     public void onApplicationEvent(ContextRefreshedEvent event) {
         Client[] clients = clients();
         Restaurant[] restaurants = restaurants();
-        menuItems(restaurants);
+        MenuItem[] itemList = menuItems(restaurants);
+        Order[] orders = orders(clients, restaurants);
+        orderItems(itemList, orders);
 
+
+    }
+
+    private Order[] orders(Client[] clients, Restaurant[] restaurants) {
+        List<Order> orderList = new ArrayList<Order>();
 
         Order o = new Order();
-        o.setDate(LocalDateTime.now());
-        o.setClient(clients[0]);
-        o.setRestaurant(restaurants[0]);
-        o.setStatus(Order.Status.Production);
-        o.setSubTotal(BigDecimal.valueOf(15));
-        o.setDeliveryTax(BigDecimal.valueOf(5));
-        o.setTotal(BigDecimal.valueOf(20));
-        orderRepository.save(o);
-
-        o = new Order();        
         o.setDate(LocalDateTime.now());
         o.setClient(clients[1]);
         o.setRestaurant(restaurants[0]);
@@ -66,8 +65,46 @@ public class InsertDataForTesting {
         o.setDeliveryTax(BigDecimal.valueOf(5));
         o.setTotal(BigDecimal.valueOf(20));
         orderRepository.save(o);
+        orderList.add(o);
 
+        o = new Order();        
+        o.setDate(LocalDateTime.now());
+        o.setClient(clients[1]);
+        o.setRestaurant(restaurants[0]);
+        o.setStatus(Order.Status.Completed);
+        o.setSubTotal(BigDecimal.valueOf(15));
+        o.setDeliveryTax(BigDecimal.valueOf(5));
+        o.setTotal(BigDecimal.valueOf(20));
+        orderRepository.save(o);
+        orderList.add(o);
 
+        Order[] array3 = new Order[orderList.size()];
+        return orderList.toArray(array3);
+    }
+
+    private Set<OrderItem> orderItems(MenuItem[] items, Order[] orders) {
+        Set<OrderItem> itemsSet = new HashSet<OrderItem>();
+
+        OrderItem oI = new OrderItem();
+        oI.setMenuItem(items[0]); 
+        oI.setObs("Sem frango");
+        oI.setPrice(BigDecimal.valueOf(15.50));
+        oI.setQuantity(2);
+        oI.setId(new OrderItemPK(orders[0], 1));
+        orderItemRepository.save(oI);
+        itemsSet.add(oI);
+
+        oI = new OrderItem();
+        oI.setMenuItem(items[1]); 
+        oI.setObs("Sem milho");
+        oI.setPrice(BigDecimal.valueOf(16.50));
+        oI.setQuantity(2);
+        oI.setId(new OrderItemPK(orders[0], 2));
+        orderItemRepository.save(oI);
+        itemsSet.add(oI);
+
+        orders[0].setItems(itemsSet);
+        return itemsSet;
     }
 
     private Restaurant[] restaurants() {
@@ -115,49 +152,6 @@ public class InsertDataForTesting {
         restaurantRepository.save(r);
         restaurants.add(r);
 
-
-        /*
-        r = new Restaurant();
-        r.setName("Bob's");
-        r.setEmail("contact@bobs.com");
-        r.setPassword(StringUtils.encrypt("123"));
-        r.setCnpj("12345678901236");
-        r.setDeliveryTax(BigDecimal.valueOf(0));
-        r.setPhone("31988733239");
-        r.getCategories().add(lanchesCategory);
-        r.setLogo("0003.restaurant.png");
-        r.setDeliveryTime(30);
-        r.setCep("31980540");
-        restaurantRepository.save(r);
-        restaurants.add(r);
-
-        r = new Restaurant();
-        r.setName("Pizza Hut");
-        r.setEmail("contact@pizzahut.com");
-        r.setPassword(StringUtils.encrypt("123"));
-        r.setCnpj("12345678901237");
-        r.setDeliveryTax(BigDecimal.valueOf(2.5));
-        r.setPhone("31988733230");
-        r.getCategories().add(pizzaCategory);
-        r.setLogo("0004.restaurant.png");
-        r.setDeliveryTime(40);
-        r.setCep("31980540");
-        restaurantRepository.save(r);
-        restaurants.add(r);
-
-        r = new Restaurant();
-        r.setName("Temaki Now");
-        r.setEmail("contact@temakinow.com");
-        r.setPassword(StringUtils.encrypt("123"));
-        r.setCnpj("12345678901231");
-        r.setDeliveryTax(BigDecimal.valueOf(0));
-        r.setPhone("31988733231");
-        r.getCategories().add(japonesaCategory);
-        r.setLogo("0005.restaurant.png");
-        r.setDeliveryTime(50);
-        r.setCep("31980540");
-        restaurantRepository.save(r);
-        restaurants.add(r); */
 
         Restaurant[] array = new Restaurant[restaurants.size()];
         return restaurants.toArray(array);
@@ -207,7 +201,8 @@ public class InsertDataForTesting {
 
     }
 
-    private void menuItems(Restaurant[] restaurants) {
+    private MenuItem[] menuItems(Restaurant[] restaurants) {
+        List<MenuItem> menuItems = new ArrayList<>();
 
         MenuItem im = new MenuItem();
         im.setCategory("Lanches");
@@ -218,6 +213,7 @@ public class InsertDataForTesting {
         im.setHighlight(true);
         im.setImage("0001-food.png");
         menuItemRepository.save(im);
+        menuItems.add(im);
 
 
         im = new MenuItem();
@@ -229,6 +225,7 @@ public class InsertDataForTesting {
         im.setHighlight(true);
         im.setImage("0002-food.png");
         menuItemRepository.save(im);
+        menuItems.add(im);
 
         im = new MenuItem();
         im.setCategory("Pizzas");
@@ -239,6 +236,10 @@ public class InsertDataForTesting {
         im.setHighlight(true);
         im.setImage("0002-food.png");
         menuItemRepository.save(im);
+        menuItems.add(im);
+
+        MenuItem[] array2 = new MenuItem[menuItems.size()];
+        return menuItems.toArray(array2);
 
 
 

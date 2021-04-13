@@ -39,6 +39,13 @@ public class OrderItem implements Serializable {
     private BigDecimal price;
 
 
+    public MenuItem getMenuItemsInfo() {
+        return menuItem;
+    }
+
+    public int getOrderItemCommand() {
+        return id.getCommand();
+    }
 
 
 }

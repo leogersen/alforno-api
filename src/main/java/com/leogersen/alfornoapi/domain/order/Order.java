@@ -108,6 +108,19 @@ public class Order implements Serializable {
 
 
     }
+    public int getClientId() {
+        return client.getId();
+        
+    }
 
+    public Set<OrderItem> getOrderItemsList() {
+        return items;
+    }
+
+    public String getRestaurantName() {
+        
+        return restaurant.getName();
+
+    }
 
 }
